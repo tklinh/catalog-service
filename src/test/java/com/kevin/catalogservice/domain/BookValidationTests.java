@@ -19,15 +19,15 @@ public class BookValidationTests {
     }
 
     @Test
-    void whenAllFieldsCorrectThenValidationSuccessds() {
-        var book = new Book("1234567890", "Title", "Author", 10.0);
+    void whenAllFieldsCorrectThenValidationSuccesses() {
+        var book = Book.of("1234567890", "Title", "Author", 10.0, "Polarsophia");
         var violations = validator.validate(book);
         assertThat(violations).isEmpty();
     }
 
     @Test
     void whenIsbnDefinedButIncorrectThenValidationFails() {
-        var book = new Book("12345678902", "Title", "Author", 10.0);
+        var book = Book.of("12345678902", "Title", "Author", 10.0, "Polarsophia");
         var violations = validator.validate(book);
         assertThat(violations).hasSize(1);
         assertThat(violations.iterator().next().getMessage()).isEqualTo("The ISBN format must be valid.");
